@@ -27,6 +27,8 @@ In order to illustrate a clustering analysis combined with a PCA analysis, we us
 
 ### Hierarchical clustering 
 
+### K-means clustering
+
 You can acces to the results via the following link:
 
 https://danaemirel.github.io/unsupervised-learning/
