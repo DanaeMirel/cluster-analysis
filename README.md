@@ -23,14 +23,11 @@ In order to illustrate a clustering analysis combined with a PCA analysis, we us
 
 ## Methodology
 
-## Hierarchical clustering 
+### PCA
 
-In *complete* linkage, the distance between clusters is the distance between 
-the furthest points of the clusters. In *single* linkage, the distance between 
-clusters is the distance between the closest points of the clusters. 
+### Hierarchical clustering 
 
-This means different linkage, different hierarchical clustering!
+You can acces to the results via the following link:
 
-
-
+https://danaemirel.github.io/unsupervised-learning/
 
