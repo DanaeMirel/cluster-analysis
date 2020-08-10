@@ -37,7 +37,8 @@ recognize the inherent structure in the input data
 
 # Case study 
 
-In order to illustrate a clustering analysis, we used human breast mass data with 
+In order to illustrate a clustering analysis, we used human breast mass data coming from [the UIC machine learning repository](https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)) with 
+
 
 - Ten features measured of each cell nuclei
 - Summary information is provided for each group of cells
