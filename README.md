@@ -25,9 +25,17 @@ In order to illustrate a clustering analysis combined with a PCA analysis, we us
 
 ### PCA
 
+We have 30 differents features, in order to perform a variable section, reduce de dimention of the data set and decorrelate our variables, we perform a PCA on our scale data. The first seventh components preserve 90% on the variance od the data. 
+
 ### Hierarchical clustering 
 
+We perform a Hierarchical clustering analysis on the pca computed one step ahead
+- complete method with a cut tree resulting in 4 clusters 
+- ward method with a cut tree resulting in 2 clusters  
+
 ### K-means clustering
+
+For comparaison purposes, we run a k-mean algorithm on the same fist seven components for k=2 and k=4
 
 You can acces to the results via the following link:
 
