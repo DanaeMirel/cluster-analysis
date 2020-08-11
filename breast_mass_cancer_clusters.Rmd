@@ -5,7 +5,7 @@ output:
     theme: united 
     vertical_layout: fill
     navbar:
-      - { title: "About", href: "", align: right}
+      - { title: "About", href: "https://archive.ics.uci.edu/ml/datasets/Breast+Cancer+Wisconsin+(Diagnostic)", align: right}
 ---
 
 ```{r setup, include=FALSE}
@@ -24,7 +24,7 @@ library('kableExtra')
 WisconsinCancer <- read_csv('https://assets.datacamp.com/production/course_6430/datasets/WisconsinCancer.csv')
 
 # take the numerical variables 
-wisc_data <- as.matrix(WisconsinCancer[,3:32]) # as a matrix in order to be able to use the tranformation functions  
+wisc_data <- as.matrix(WisconsinCancer[, 3:32]) # as a matrix in order to be able to use the tranformation functions  
 
 # Set the row names of wisc.data
 row.names(wisc_data) <- WisconsinCancer$id
@@ -50,13 +50,14 @@ corr_pal_viridis <- viridis_pal(direction = 1)(30)
 corr <- round(cor(wisc_data), 1)
 
 # Correlogram
-ggcorrplot(corr, hc.order = TRUE, 
-                             type = "lower", 
-                             lab = FALSE, 
-                             method="square", 
-                             colors = c(corr_pal_viridis[18], "white", corr_pal_magma[12]), 
-                             title="Correlogram", 
-                             ggtheme=theme_minimal) +   
+ggcorrplot(corr
+           , hc.order = TRUE 
+           , type = "lower"
+           , lab = FALSE
+           , method="square"
+           , colors = c(corr_pal_viridis[18], "white", corr_pal_magma[12])
+           , title="Correlogram"
+           , ggtheme=theme_minimal) +   
   theme(axis.text.x = element_blank() #element_text(angle = 90, hjust = 1, size=7)
       , axis.text.y = element_text(size=10)) 
       
@@ -73,7 +74,7 @@ ggcorrplot(corr, hc.order = TRUE,
 WC_Scatter <- WisconsinCancer %>% 
   rename(concave_points_mean = `concave points_mean`) %>% 
   select(concave_points_mean, radius_mean, diagnosis) %>% 
-  mutate(diagnosis= as.factor(diagnosis))
+  mutate(diagnosis = as.factor(diagnosis))
 
 
 WC_Scatter %>% 
@@ -173,7 +174,6 @@ plot_ly(opacity = 0.5) %>%
 
 > Six other more real-valued features were computed for each cell nucleus.
 
-
 Perform PCA {data-orientation=rows}
 =============================================================
 
@@ -188,13 +188,12 @@ Row {data-width=650}
 wisc_pr <-  prcomp(x = wisc_data, scale = TRUE, center = TRUE) # scale and center the data 
 
 PCA_wisc_data <- as.data.frame(wisc_pr$x) %>% 
-  mutate(diagnosis=as.factor(WisconsinCancer$diagnosis))
+  mutate(diagnosis = as.factor(WisconsinCancer$diagnosis))
 
 
 PCA_wisc_data %>% 
   plot_ly(x = ~PC1 , y = ~PC2, color = ~diagnosis) %>%
   add_markers(marker = list(opacity = 0.5)
-            #, showlegend = FALSE
             , colors = c(corr_pal_magma[15], corr_pal_magma[1])) %>%  
   layout(title = 'PCA features and diagnosis'
          , xaxis = list(title = "1st component", zeroline = FALSE) 
@@ -204,7 +203,6 @@ PCA_wisc_data %>%
 
 > Perform principal component analysis in order to reduce the dimension and eliminate the correlation between variables 
  
- 
 ### First and third components by diagnosis
 
 ```{r}
@@ -212,7 +210,6 @@ PCA_wisc_data %>%
 PCA_wisc_data %>% 
   plot_ly(x = ~PC1 , y = ~PC3, color = ~diagnosis) %>%
   add_markers(marker = list(opacity = 0.5)
-              #, showlegend = FALSE
               , colors = c(corr_pal_magma[15], corr_pal_magma[1])) %>%  
   layout(title = 'PCA features and diagnosis'
          , xaxis = list(title = "1st component", zeroline = FALSE) 
@@ -236,7 +233,6 @@ PCA_wisc_data %>%
 
 >  Diagnosis (M = malignant, B = benign)
 
-
 Row {data-width=350}
 -------------------------------------
 
@@ -259,11 +255,11 @@ PCA_var_exp <- bind_cols(component=colnames(PCA_wisc_data[1:30])
 
 PCA_var_exp %>%
   mutate(component = fct_reorder(component, expl_var, .desc = TRUE)) %>%
-  plot_ly(x= ~ component, y = ~ expl_var, 
-          hoverinfo = "text",
-          text = ~paste("Contribution of", component, ":", expl_var, "%"),
-          marker = list(color = as.vector(corr_pal_revmagma))
-          ) %>%
+  plot_ly(x= ~ component
+          , y = ~ expl_var
+          , hoverinfo = "text"
+          , text = ~paste("Contribution of", component, ":", expl_var, "%")
+          , marker = list(color = as.vector(corr_pal_revmagma))) %>%
   add_bars() %>% 
   layout(title = 'PCA expleined variance'
          , xaxis = list(title = 'component', zeroline = FALSE) 
@@ -271,31 +267,29 @@ PCA_var_exp %>%
 
 ```
 
-
 ### Cumulative percentage of variance explained by each component
     
 ```{r}
 
 PCA_var_exp %>%
   mutate(component = fct_reorder(component, cum_expl_var, .desc = FALSE)) %>%
-  plot_ly(x= ~ component, y = ~ cum_expl_var, 
-          hoverinfo = "text",
-          text = ~paste("cumulative variance of", component, ":", cum_expl_var, "%"),
-          marker = list(color = as.vector(corr_pal_magma))
-  ) %>%
+  plot_ly(x= ~ component
+          , y = ~ cum_expl_var
+          , hoverinfo = "text"
+          , text = ~paste("cumulative variance of", component, ":", cum_expl_var, "%")
+          , marker = list(color = as.vector(corr_pal_magma))) %>%
   add_bars() %>% 
   layout(title = 'PCA cumulative expleined variance'
          , xaxis = list(title = 'component', zeroline = FALSE) 
-         , yaxis = list(title = '% of cumulative expleined variance', zeroline = FALSE))
+         , yaxis = list(title = '% of cumulative exp. var.', zeroline = FALSE))
 ```
 
 > with seven component we can explain 90% of the variance in the data set 
 
-
 Clustering analysis{data-orientation=colums}
 =============================================================
 
-Column{data-width=415}
+Column{data-width=400}
 -------------------------------------
 
 ### Hierarchical clustering, ward method with k=2
@@ -322,17 +316,14 @@ PCA_wisc_data_cl <- PCA_wisc_data %>%
 PCA_wisc_data_cl %>%
   plot_ly(x = ~PC1 , y = ~PC2, color = ~hclust_k2) %>%
   add_markers(marker = list(opacity = 0.75)
-            , colors = c(corr_pal_magma[1], corr_pal_magma[12])
-              ) %>%
+            , colors = c(corr_pal_magma[1], corr_pal_magma[12])) %>%
   layout(title = 'PCA features and cluster labels'
          , xaxis = list(title = "1st component", zeroline = FALSE)
          , yaxis = list(title = "2nd component", zeroline = FALSE))
 
-
 ``` 
 
 > Accuracy : 90%    
-    
     
 ### Hierarchical clustering, complete method with k=4
     
@@ -341,16 +332,14 @@ PCA_wisc_data_cl %>%
 PCA_wisc_data_cl %>%
   plot_ly(x = ~PC1 , y = ~PC2, color = ~hclust_k4) %>%
   add_markers(marker = list(opacity = 0.75)
-            , colors = c(corr_pal_magma[1], corr_pal_magma[12], corr_pal_magma[18], corr_pal_magma[25])
-              ) %>%
+            , colors = c(corr_pal_magma[1], corr_pal_magma[12], corr_pal_magma[18], corr_pal_magma[25])) %>%
   layout(title = 'PCA features and clusters labels'
          , xaxis = list(title = "1st component", zeroline = FALSE)
          , yaxis = list(title = "2nd component", zeroline = FALSE))
 
 ```
  
-
-Column{data-width=410}
+Column{data-width=400}
 -------------------------------------
 
 ### K-means clustering k=2
@@ -365,19 +354,14 @@ PCA_wisc_data_cl <- PCA_wisc_data_cl %>%
   mutate(kmeans_k2 = as.factor(cl2_wisc_pr_km$cluster)
        , kmeans_k4 = as.factor(cl4_wisc_pr_km$cluster))
 
-
 # visualization of the results 
 PCA_wisc_data_cl %>% 
   plot_ly(x = ~PC1 , y = ~PC2, color = ~kmeans_k2) %>%
   add_markers(marker = list(opacity = 0.75)
-              , colors = c(corr_pal_magma[1], corr_pal_magma[12])
-  ) %>%  
+              , colors = c(corr_pal_magma[1], corr_pal_magma[12])) %>%  
   layout(title = 'PCA features and diagnosis'
          , xaxis = list(title = "1st component", zeroline = FALSE) 
          , yaxis = list(title = "2nd component", zeroline = FALSE))
-
-
-
 ```
 
 > Accuracy : 91%  
@@ -397,11 +381,10 @@ PCA_wisc_data_cl %>%
 
 ```
 
-
-Column{data-width=175}
+Column{data-width=200}
 -------------------------------------
 
-### k=2 
+### Confusion matrix, k=2 
     
 ```{r}
 
@@ -424,10 +407,9 @@ bind_rows(h_cl_k2_tl, km_cl_k2_tl) %>%
 ```
   
 
-### k=4
+### Confusion matrix, k=4
 
 ```{r}
-
 
 h_cl_k4_tl <-  PCA_wisc_data_cl %>%
   group_by(diagnosis, hclust_k4) %>%
@@ -441,14 +423,11 @@ km_cl_k4_tl <- PCA_wisc_data_cl %>%
   spread(kmeans_k4, count) %>% 
   replace(., is.na(.), 0)
 
-
 bind_rows(h_cl_k4_tl, km_cl_k4_tl) %>% 
   knitr::kable(caption = "number of clusters : 4") %>%
   kable_styling(bootstrap_options = c("striped", "hover"), full_width = F, position = "center") %>% 
   pack_rows("Hierarchical clustering", 1, 2, label_row_css = "background-color: #842681FF; color: #fff;") %>%
   pack_rows("K means clustering", 3, 4, label_row_css = "background-color: #842681FF; color: #fff;")
-
-
 
 ```
 
