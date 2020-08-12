@@ -1,4 +1,3 @@
-
 # Unsupervised learning on the Breast Cancer Wisconsin Data Set
 
 In order to illustrate a clustering analysis combined with a PCA analysis, we used human breast mass data coming from 
@@ -41,7 +40,7 @@ We also wanted to highlight the difference between the measures on the cancerous
 In order to perform a variable section, reduce the dimension of the data set and decorrelate the variables, we perform a PCA on the scaled data. 
 The first seven components preserve 90% of the variance in the data.
 
-![view](pca.png)
+![view](images/pca.png)
 
 ### 3. Clustering analysis
 
@@ -53,14 +52,14 @@ The two following algorithm variations have been considered.
 - *Complete* method with a cut tree resulting in 4 clusters, 
 - *Ward* method with a cut tree resulting in 2 clusters.  
 
-![view](hclust.png)
+![view](images/hclust.png)
 
 
 - **3.2 K-means clustering**
 
 For comparaison purposes, we run a k-mean algorithm on the same first seven components for k=2 and k=4. 
 
-![view](kmeans.png)
+![view](images/kmeans.png)
 
 ### 4. Results
 
