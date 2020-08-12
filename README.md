@@ -4,7 +4,9 @@ In order to illustrate a clustering analysis combined with a PCA analysis, we us
 
 ## Attribute Information
 
-- Ten features measured of each cell nuclei
+The data set includes 32 variables and 569 observations corresponding to: 
+
+- The mean, standard deviation and maximum of ten features measured of each cell nuclei, they are described as follows: 
     - a) radius (mean of distances from center to points on the perimeter)
     - b) texture (standard deviation of gray-scale values)
     - c) perimeter
@@ -16,29 +18,42 @@ In order to illustrate a clustering analysis combined with a PCA analysis, we us
     - i) symmetry
     - j) fractal dimension ("coastline approximation" - 1)
 
-
-- Summary information is provided for each group of cells
-
+- Id of the patient 
 - Diagnosis: benign (not cancerous) and malignant (cancerous)
 
 ## Methodology
 
-### PCA
+### 1. Exploratory data analysis
 
-We have 30 differents features. In order to perform a variable section, reduce de dimention of the data set and decorrelate the variables, we perform a PCA on the scaled data. The first seven components preserve 90% on the variance of the data. 
+We have summary information (mean, std and max) provided for each of the 10 groups of cells, resulting in 30 numerical variables. In order to explore the correlation between variables, we present a correlogram which indicates the presence of several features highly correlated to each other. This suggest that it would be appropriated to preprocess the data by PCA (principal component analysis) before performing any clustering techniques on the data.
+
+We also wanted to highlight the difference between the measures on the cancerous and non cancerous cells.   
+
+
+### 2. Principal Component Analysis
+
+In order to perform a variable section, reduce the dimension of the data set and decorrelate the variables, we perform a PCA on the scaled data. The first seven components preserve 90% of the variance in the data.
 
 ![view](pca.png)
 
-### Hierarchical clustering 
+### 3. Clustering analysis
 
-We perform a Hierarchical clustering analysis on the pca computed one step ahead, the two following variants have been considered. 
+- **3.1 Hierarchical clustering** 
 
-- *complete* method with a cut tree resulting in 4 clusters, 
-- *ward* method with a cut tree resulting in 2 clusters.  
+We perform a Hierarchical clustering analysis on the first seven components computed one step ahead. The two following algorithm variations have been considered.
 
-### K-means clustering
+    - *complete* method with a cut tree resulting in 4 clusters, 
+    - *ward* method with a cut tree resulting in 2 clusters.  
 
-For comparaison purposes, we run a k-mean algorithm on the same first seven components for k=2 and k=4. The results are available via the following link:
+![view](hclust.png)
 
-https://danaemirel.github.io/unsupervised-learning/
 
+- **3.2 K-means clustering**
+
+For comparaison purposes, we run a k-mean algorithm on the same first seven components for k=2 and k=4. 
+
+![view](kmeans.png)
+
+### 4. Results
+
+The [dashboard](https://danaemirel.github.io/unsupervised-learning/) and the results were build in R. Nevertheless we include the very same analysis using python.    
