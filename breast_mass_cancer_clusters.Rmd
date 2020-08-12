@@ -64,8 +64,7 @@ ggcorrplot(corr
 
 ```
 
-> Features are computed from a digitized image of a fine needle aspirate of a breast mass. They describe characteristics of the cell nuclei present in the image. There are several features highly correlated to each other, this suggest that il would be appropriated to preprocess the data by PCA (principal component analysis). 
-
+> Features are computed from a digitized image of a fine needle aspirate of a breast mass. They describe characteristics of the cell nuclei present in the image. There are several features highly correlated to each other, this suggest that it would be appropriated to preprocess the data by PCA (principal component analysis). 
 
 ### Relation by diagnosis (M = malignant, B = benign)
 
@@ -88,7 +87,7 @@ WC_Scatter %>%
 
 ```
 
-> Different scales between variables suggest that it is appropriate to normalize the data before performing clustering analysis.
+> Different scales between variables suggest that it is appropriate to normalize the data before performing clustering analysis. We observe important differences in the masures taken from the cancerous and the non cancerous cells. 
 
 Row {data-height=400}
 -------------------------------------
