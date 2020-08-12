@@ -42,8 +42,8 @@ In order to perform a variable section, reduce the dimension of the data set and
 
 We perform a Hierarchical clustering analysis on the first seven components computed one step ahead. The two following algorithm variations have been considered.
 
-    - *complete* method with a cut tree resulting in 4 clusters, 
-    - *ward* method with a cut tree resulting in 2 clusters.  
+- *complete* method with a cut tree resulting in 4 clusters, 
+- *ward* method with a cut tree resulting in 2 clusters.  
 
 ![view](hclust.png)
 
