@@ -63,4 +63,4 @@ For comparaison purposes, we run a k-mean algorithm on the same first seven comp
 
 ### 4. Results
 
-The [dashboard](https://danaemirel.github.io/unsupervised-learning/) and the results were build in R. Nevertheless we include the very same analysis using python.    
+The [dashboard](https://rpubs.com/DanaeMartinez/Clustering_BreastMassData) and the results were build in R. Nevertheless we include the very same analysis using python.    
